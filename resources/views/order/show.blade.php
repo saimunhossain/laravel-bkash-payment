@@ -14,38 +14,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped table-bordered mt-5">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Currency</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Invoice</th>
-                        <th scope="col">Transection ID</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" class="text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($orders as $item)
-                          <tr @if($item->status === 'Processing') class="table-success" @endif>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $item->product_name }}</td>
-                            <td>{{ $item->currency }}</td>
-                            <td>{{ $item->amount }}</td>
-                            <td>{{ $item->invoice }}</td>
-                            <td>{{ $item->txrID }}</td>
-                            <td>{{ $item->status }}</td>
-                            <td class="text-right">
-                                <a href="{{ route('orders.show',$item->id) }}" class="btn btn-sm btn-primary">Show</a>
-                            </td>
-                          </tr>
-                        @empty
-                            <tr>No Data Available</tr>
-                        @endforelse
-                    </tbody>
-                  </table>
+                <div class="card mt-5">
+                    <div class="card-header">
+                        {{ $order->product_name }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $order->product_name }}</h5>
+                        <p class="card-text">{{ $order->amount }}</p>
+                        <p class="card-text">{{ $order->invoice }}</p>
+                        @if($order->status === 'Pending')
+                            <button class="btn btn-info" id="bkash-button">Pay with bKash</button>
+                        @else 
+                            <h4><span class="badge badge-success">Paid</span></h4>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>
