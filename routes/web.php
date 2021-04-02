@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('orders','OrderController');
+Route::post('token','PaymentController@token')->name('token');
